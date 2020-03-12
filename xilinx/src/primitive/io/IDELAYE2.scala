@@ -1,4 +1,5 @@
-package xilinx.io
+package xilinx
+package io
 
 import chisel3._
 import chisel3.experimental._
@@ -33,20 +34,17 @@ class IDELAYE2(CINVCTRL_SEL: Boolean = false,
                DELAY_SRC: String = "IDATAIN",
                HIGH_PERFORMANCE_MODE: Boolean = false,
                IDELAY_TYPE: String = "FIXED",
-               IDELAY_VALUE: Int = 0,
+               IDELAY_VALUE: Double = 0,
                PIPE_SEL: Boolean = false,
                REFCLK_FREQUENCY: Double = 200.0,
                SIGNAL_PATTERN: String = "DATA") extends ExtModule {
-  /** TODO: a XilinxPrimitive class for wrapper parseBoolParam and automaticly [[params]] generation. */
-  def parseBoolParam(param: Boolean) = if (param) "TRUE" else "FLASE"
-
   override val params: Map[String, Param] = Map(
-    "CINVCTRL_SEL" -> parseBoolParam(CINVCTRL_SEL),
+    "CINVCTRL_SEL" -> CINVCTRL_SEL.str,
     "DELAY_SRC" -> DELAY_SRC,
-    "HIGH_PERFORMANCE_MODE" -> parseBoolParam(HIGH_PERFORMANCE_MODE),
+    "HIGH_PERFORMANCE_MODE" -> HIGH_PERFORMANCE_MODE.str,
     "IDELAY_TYPE" -> IDELAY_TYPE,
     "IDELAY_VALUE" -> IDELAY_VALUE,
-    "PIPE_SEL" -> parseBoolParam(PIPE_SEL),
+    "PIPE_SEL" -> PIPE_SEL.str,
     "REFCLK_FREQUENCY" -> REFCLK_FREQUENCY,
     "SIGNAL_PATTERN" -> SIGNAL_PATTERN
   )

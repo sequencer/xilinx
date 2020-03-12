@@ -1,4 +1,5 @@
-package xilinx.config
+package xilinx
+package config
 
 import chisel3._
 import chisel3.experimental._
@@ -16,8 +17,8 @@ import chisel3.experimental._
   * for the specific device.
   *
   * @param JTAG_CHAIN Value for USER command.
-  * */
-class BSCANE2(JTAG_CHAIN: Int = 1) extends ExtModule(Map("JTAG_CHAIN" -> JTAG_CHAIN)) {
+  **/
+class BSCANE2(JTAG_CHAIN: Double = 1) extends ExtModule(Map("JTAG_CHAIN" -> JTAG_CHAIN)) {
   require(1 to 4 contains JTAG_CHAIN)
   /** [[CAPTURE]] output from TAP controller. */
   val CAPTURE = IO(Output(Bool()))
