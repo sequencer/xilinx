@@ -11,9 +11,20 @@ import chisel3.experimental._
   **/
 class BUFGCE extends ExtModule {
   /** Clock output. */
-  val O = IO(Output(Bool()))
+  val O = IO(Output(Clock()))
   /** Clock buffer active-High enable. */
   val CE = IO(Input(Bool()))
   /** Clock input. */
-  val I = IO(Input(Bool()))
+  val I = IO(Input(Clock()))
+}
+
+object BUFGCE {
+  def apply(i: Clock, ce: Bool): Clock = {
+    requireIsHardware(i)
+    requireIsHardware(ce)
+    val bufgce = Module(new BUFGCE)
+    bufgce.I := i
+    bufgce.CE := ce
+    bufgce.O
+  }
 }

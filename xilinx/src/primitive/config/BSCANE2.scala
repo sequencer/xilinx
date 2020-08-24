@@ -34,7 +34,7 @@ class BSCANE2(JTAG_CHAIN: Double = 1) extends ExtModule(Map("JTAG_CHAIN" -> JTAG
   /** Asserted when TAP controller is in Shift-DR state. */
   val SHIFT = IO(Output(Bool()))
   /** Test Clock. Primitive output from external TAP pin to FPGA internal logic. */
-  val TCK = IO(Output(Bool()))
+  val TCK = IO(Output(Clock()))
   /** Test Data Input. Primitive output from external TAP pin to FPGA internal logic. */
   val TDI = IO(Output(Bool()))
   /** Test Data Output. Primitive input from User internal scan register to
@@ -48,4 +48,8 @@ class BSCANE2(JTAG_CHAIN: Double = 1) extends ExtModule(Map("JTAG_CHAIN" -> JTAG
     * the internal scan register on the rising edge of the [[UPDATE]] signal.
     */
   val UPDATE = IO(Output(Bool()))
+}
+
+object BSCANE2 {
+  def apply(jtagChain: Int) = Module(new BSCANE2(jtagChain.toDouble))
 }
