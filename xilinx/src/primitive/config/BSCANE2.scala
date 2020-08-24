@@ -1,11 +1,9 @@
-package xilinx
-package config
+package xilinx.primitive.config
 
 import chisel3._
 import chisel3.experimental._
 
-/**
-  * This design element allows access to and from internal logic by the JTAG Boundary Scan logic
+/** This design element allows access to and from internal logic by the JTAG Boundary Scan logic
   * controller. This allows for communication between the internal running design and the dedicated
   * JTAG pins of the FPGA. Each instance of this design element will handle one JTAG USER
   * instruction (USER1 through USER4) as set with the [[JTAG_CHAIN]] attribute.
