@@ -25,7 +25,9 @@ class xilinx extends ScalaModule with PublishModule with ScalafmtModule {
 
   def moduleDeps = super.moduleDeps ++ chisel3Module 
 
-  def ivyDeps = super.ivyDeps() ++ chisel3IvyDeps
+  def ivyDeps = Agg(
+    ivy"org.scala-lang.modules::scala-xml:1.3.0"
+  ) ++ chisel3IvyDeps
 
   def publishVersion = "0.1.0"
 
