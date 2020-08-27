@@ -14,9 +14,14 @@ import chisel3.experimental._
   *
   * 7 series FPGAs and UltraScale of BSCANE2 primitive are identical.
   *
-  * @param JTAG_CHAIN Value for USER command.
+  * @param DISABLE_JTAG Disables JTAG boundary scan.
+  * @param JTAG_CHAIN   Value for USER command.
   */
-class BSCANE2(JTAG_CHAIN: Double = 1) extends ExtModule(Map("JTAG_CHAIN" -> JTAG_CHAIN)) {
+class BSCANE2(DISABLE_JTAG: String, JTAG_CHAIN: Double = 1) extends ExtModule(
+  Map(
+    "DISABLE_JTAG" -> DISABLE_JTAG,
+    "JTAG_CHAIN" -> JTAG_CHAIN
+  )) {
   require(1 to 4 contains JTAG_CHAIN)
   /** Asserted when TAP controller is in Capture-DR state */
   val CAPTURE = IO(Output(Bool()))
@@ -51,5 +56,5 @@ class BSCANE2(JTAG_CHAIN: Double = 1) extends ExtModule(Map("JTAG_CHAIN" -> JTAG
 }
 
 object BSCANE2 {
-  def apply(jtagChain: Int) = Module(new BSCANE2(jtagChain.toDouble))
+  def apply(jtagChain: Int, disableJtag: Boolean = false): BSCANE2 = Module(new BSCANE2(if (disableJtag) "True" else "False", jtagChain.toDouble))
 }
